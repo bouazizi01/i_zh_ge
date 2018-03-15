@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="m-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!--begin::Portlet-->
+                        <div class="m-portlet m-portlet--tabs">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            Les notes de
+                                            <a sec:authorize="hasAnyAuthority('super_admin','admin','scolarity')" th:href="@{'/administration/students/profile/'+${student.id}}">
+                                                <span th:text="${student.getFullName()}"></span>
+                                            </a>
+                                            <span sec:authorize="hasAnyAuthority('student')" th:text="${student.getFullName()}"></span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__head-tools">
+                                    <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--right m-tabs-line-danger" role="tablist">
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#S1" role="tab">
+                                                S1
+                                            </a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#S2" role="tab">
+                                                S2
+                                            </a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#S3" role="tab">
+                                                S3
+                                            </a>
+                                        </li>
+                                        <li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#S4" role="tab">
+                                                S4
+                                            </a>
+                                        </li><li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#S5" role="tab">
+                                                S5
+                                            </a>
+                                        </li><li class="nav-item m-tabs__item">
+                                            <a class="nav-link m-tabs__link" data-toggle="tab" href="#S6" role="tab">
+                                                S6
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="m-portlet__body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="S1">
+                                        <table class="m-datatable_s1" id="html_table_s1" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                                <th title="option" sec:authorize="hasAuthority('super_admin')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S1')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"  >
+                                                    <a th:if="${note.isReclamable()}" title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane " id="S2">
+                                        <table class="m-datatable_s2" id="html_table_s2" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                                <th title="option" sec:authorize="hasAuthority('super_admin')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S2')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"  >
+                                                    <a th:if="${note.isReclamable()}" title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane " id="S3">
+                                        <table class="m-datatable_s3" id="html_table_s3" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                                <th title="option" sec:authorize="hasAuthority('super_admin')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S3')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"  >
+                                                    <a th:if="${note.isReclamable()}"  title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane " id="S4">
+                                        <table class="m-datatable_s4" id="html_table_s4" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                                <th title="option" sec:authorize="hasAuthority('super_admin')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S4')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"   >
+                                                    <a th:if="${note.isReclamable()}" title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane " id="S5">
+                                        <table class="m-datatable_s5" id="html_table_s5" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                                <th title="option" sec:authorize="hasAuthority('super_admin')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S5')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"   >
+                                                    <a th:if="${note.isReclamable()}" title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane " id="S6">
+                                        <table class="m-datatable_s6" id="html_table_s6" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th title="module">Module</th>
+                                                <th title="annee">Annee</th>
+                                                <th title="note">Note</th>
+                                                <th title="option" sec:authorize="hasAuthority('student')"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="note : ${notes.get('S6')}">
+                                                <td th:text="${note.module.name}"></td>
+                                                <td th:text="${note.year}"></td>
+                                                <td th:text="${note.note} + '('+${note.session}+')'"></td>
+                                                <td  sec:authorize="hasAuthority('student')"   >
+                                                    <a th:if="${note.isReclamable()}" title="reclamer une note" th:href="@{'/student/claim-note/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-meh-o"></i> Reclamer
+                                                    </a>
+                                                </td>
+                                                <td  sec:authorize="hasAuthority('super_admin')" >
+                                                    <a title="editer une note" th:href="@{'/admin/note/edit/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-edit"></i> Editer
+                                                    </a>
+                                                    <a title="supprimer une note" th:href="@{'/admin/note/delete/'+${note.id}}">
+                                                        <i class="fa fa-2x fa-remove"></i> Supprimer
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Portlet-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

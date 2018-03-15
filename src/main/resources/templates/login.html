@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--
+Platform : UIZ SCHOLAR
+Version : 1.0.0
+Author : NAJEH YOUSSEF && JAOUAD EL AOUD
+Contact : yo.najeh@gmail.cm
+LinkedIn : https://www.linkedin.com/in/yo-najeh/
+Facebook : https://www.facebook.com/yo.najeh
+-->
+<!-- begin::Head -->
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        UIZ SCHOLAR | Login
+    </title>
+    <meta name="description" content="Latest updates and statistic charts"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!--end::Web font -->
+
+
+    <!--begin::Page Vendors -->
+    <!--end::Page Vendors -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/assets/vendors/base/vendors.bundle.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/assets/demo/demo3/base/style.bundle.css}"/>
+    <!--end::Base Styles -->
+    <link rel="shortcut icon" href="../../../assets/demo/default/media/img/logo/favicon.ico" />
+</head>
+<!-- end::Head -->
+<!-- end::Body -->
+<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--singin" id="m_login">
+        <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+            <div class="m-stack m-stack--hor m-stack--desktop">
+                <div class="m-stack__item m-stack__item--fluid">
+                    <div class="m-login__wrapper">
+                        <div class="m-login__logo">
+                            <a href="#">
+                                <img width="240" height="75"  alt="" th:src="@{/imgs/LOGO_ibn.png}" />
+                            </a>
+                        </div>
+                        <div class="m-login__signin">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    Accéder à votre espace
+                                </h3>
+                            </div>
+                            <div class="error"
+                                 th:if="${(param.error != null) and (param.error[0] == 'true')}">
+                                <span th:text='${session["SPRING_SECURITY_LAST_EXCEPTION"].message}' ></span>
+                                    Your login attempt was not successful, try again.<br />
+                            </div>
+                            <form class="m-login__form m-form" action="" method="post">
+                                <div class="form-group m-form__group">
+                                    <input id="username" class="form-control m-input" type="text" placeholder="Username" name="username" autocomplete="off"/>
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <input id="password" class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password"/>
+                                </div>
+                                <div class="m-login__form-action">
+                                    <button type="submit" id="" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+                                        S'identifier
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-image: url(./imgs/university-students.jpg)">
+            <div class="m-grid__item m-grid__item--middle">
+                <h3 class="m-login__welcome">
+                    UIZ SCHOLAR
+                </h3>
+                <p class="m-login__msg">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Page -->
+
+<!--begin::Base Scripts -->
+<script th:src="@{/assets/vendors/base/vendors.bundle.js}"></script>
+<script th:src="@{/assets/demo/demo3/base/scripts.bundle.js}"></script>
+<!--end::Base Scripts -->
+
+<!--begin::Page Snippets -->
+<script th:src="@{/assets/snippets/pages/user/login.js}"></script>
+<!--end::Page Snippets -->
+</body>
+<!-- end::Body -->
+</html>

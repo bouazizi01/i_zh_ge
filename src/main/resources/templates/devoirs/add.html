@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajouter un Devoirs
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="m-form m-form--fit m-form--label-align-right" enctype="multipart/form-data" method="post"
+                      th:action="@{/teacher/homework/add}">
+                    <div class="m-portlet__body">
+
+                        <div class="form-group m-form__group">
+                            <label for="title">
+                                titre
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="title" id="title"
+                                   placeholder="Entrer le titre du doc"/>
+                            <input type="hidden" name="planingId" th:value="${id}"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="description">
+                                description
+                            </label>
+                            <textarea type="text" class="form-control m-input m-input--square" name="description"
+                                      id="description"
+                                      placeholder="Entrer le titre du doc"></textarea>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="file">
+                                document
+                            </label>
+                            <input type="file" class="form-control m-input m-input--square" name="file" id="file"
+                                   accept="application/pdf"/>
+
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

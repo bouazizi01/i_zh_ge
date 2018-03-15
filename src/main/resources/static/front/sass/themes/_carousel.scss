@@ -1,0 +1,43 @@
+
+/* ------------------------------------------------------------------------------------------
+ *                                     Carousel styles
+ * ------------------------------------------------------------------------------------------
+ */
+
+ .carousel-caption {
+ 	z-index: 10;
+
+ }
+
+.carousel-inner > .item {
+	height: 350px;
+	
+	background-color: #000;
+	& > img {
+		min-width: 100%;
+		height: auto;
+	}
+
+	@media (min-width:768px) {
+		height: 400px;
+	}
+}
+
+.glyphicon-chevron-left  {&:before { content: "\e079";}}
+
+.glyphicon-chevron-right {&:before { content: "\e080";}}
+
+.glyphicon-education     {&:before { content: "\e233";}}
+
+@media (min-width:768px) {
+	.carousel-caption{
+		bottom: 40px;
+		& h1{
+			font-size: 35px;
+		}
+		& p {
+			font-size: 18px;
+		}
+	}
+	
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="front/fbase">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+
+    <div id="myCarousel" class="carousel slide t-margin-bottom">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+
+            <div class="item active">
+                <img th:src="@{/front/images/carousel/slide1.jpg}" alt="genie-macanique"/>
+                <div class="container active">
+                    <div class="carousel-caption">
+                        <h1>GENIE MECANIQUE</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- End Item 1 -->
+
+            <div class="item">
+                <img th:src="@{/front/images/carousel/slide2.jpg}" alt="genie-macanique"/>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>GENIE INFORMATIQUE</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- End Item 2 -->
+
+            <div class="item">
+                <img th:src="@{/front/images/carousel/slide3.jpg}" alt="genie-macanique"/>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>GENIE ELECTRIQUE</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- End Item 3 -->
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div><!-- CAROUSEL END -->
+
+    <section>
+        <div class="t-avis-cursus container t-margin-bottom">
+            <div class="row">
+                <div class="t-avis col-sm-7">
+                    <h2>Annonces / <a href="#"><span>Toutes les annonces</span></a></h2>
+
+                    <div class="panel-group" id="accordion">
+
+                        <div th:each="a : ${annonces}" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" th:href="${'#'+a.id}">
+                                       <span th:text="${a.title}"></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div th:id="${a.id}" class="panel-collapse collapse" >
+                                <div class="panel-body">
+                                <p th:text="${a.content}">
+
+                                </p>
+                                </div>
+                            </div>
+                        </div><!-- END PANEL1 -->
+
+
+                    </div> <!-- END PANEL-GROUP -->
+
+                </div>
+                <div class="t-cursus col-sm-5 col-lg-4 col-lg-offset-1">
+                    <h2>Formations / <a href="#"><span>Toutes les filières</span></a></h2>
+
+                    <div class="cursus crs1"><a href="">Cycle préparatoire</a></div>
+                    <div class="cursus crs2"><a href="">Cycle d'ingénieur</a></div>
+                    <div class="cursus crs3"><a href="">Master</a></div>
+                    <div class="cursus crs4"><a href="">Formation doctorale</a></div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- END `AVIS & FORMATION` SECTION-->
+
+
+    <hr/>
+
+    <section class="t-margin">
+        <div class="t-actualites container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Actualités / <a href="#"><span>Toutes les actualités</span></a></h2>
+                </div>
+            </div>
+
+            <ul class="row list-unstyled t-posts">
+
+                <li class="col-sm-4 col-md-4">
+                    <div class="img-post">
+                        <img th:src="@{/front/images/articles/art1.jpg}" class="img-responsive" alt="article1"/>
+                    </div>
+                    <h3 class="title-post"><a href="#">D.U Efficacité Energétique</a></h3>
+                    <p>Le Diplôme d’Université Bac + 5 en « Efficacité Energétique et Contrôle des Bâtiments » a pour
+                        finalité de former des professionnels dans le domaine de la gestion de l’énergie intégrant des
+                        nouvelles techniques et technologies ...<br/>
+                        <a class="align-right  la-suite" href="#">Lire la suite...</a>
+                    </p>
+                </li>
+
+                <li class="col-sm-4 col-md-4">
+                    <div class="img-post">
+                        <img th:src="@{/front/images/articles/art2.jpg}" class="img-responsive" alt="article2"/>
+                    </div>
+                    <h3 class="title-post"><a href="#">D.U Ingénierie Financière</a></h3>
+                    <p>Le Diplôme d’Université « Ingénierie financière » a pour finalité de former des professionnels
+                        qualifiés finance de marché, gestion des risques, gestion de portefeuille en maîtrisant les outils
+                        mathématiques et économétriques
+                        professionnels qualifiés finance de marché <br/>
+                        <a class="align-right la-suite" href="#">Lire la suite...</a>
+                    </p>
+                </li>
+
+                <li class="col-sm-4 col-md-4">
+                    <div class="img-post">
+                        <img th:src="@{/front/images/articles/art3.jpg}" class="img-responsive" alt="article3"/>
+                    </div>
+                    <h3 class="title-post"><a href="#">Projet ISLAH</a></h3>
+                    <p>Dans le cadre du projet ISLAH, un service est proposé aux diplômés de l’enseignement supérieur
+                        destiné à améliorer l’accessibilité et la qualité de leurs CV qui seront largement diffusés sur
+                        internet afin d’accroître leur visibilité et les<br/>
+                        <a class="align-right la-suite" href="#">Lire la suite...</a>
+                    </p>
+                </li>
+
+            </ul>
+        </div>
+    </section> <!-- END `ACTUALITES` SECTION-->
+
+
+    <hr style="margin-bottom:0;"/>
+
+    <section id="map-canvas" style="height:300px;width:100%;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6882.080914933344!2d-9.579084!3d30.406594!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdb3b6529f631e81%3A0xff5fad85cf4f392d!2sEcole+Nationale+des+Sciences+Appliqu%C3%A9es+d&#39;Agadir!5e0!3m2!1sfr!2s!4v1423150759094"
+                width="100%" height="100%" frameborder="0" style="border:0">
+        </iframe>
+    </section>
+</div>
+</body>
+</html>

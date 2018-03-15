@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Editer un evenment
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="m-form m-form--fit m-form--label-align-right" method="post"
+                      th:action="@{/scolarity/events/edit}">
+                    <div class="form-group m-form__group m--padding-top-10">
+                        <input type="hidden" name="id" th:value="${event.id}"/>
+                        <label for="event_name">
+                            Nom d'evenment
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square" th:value="${event.name}"
+                               name="name" id="event_name"
+                               placeholder="Entrer le nom d'evenment"/>
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <input type="hidden" name="id" th:value="${event.id}"/>
+                        <label for="date_event">
+                            Date d'evenment
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square datepicker-simple"
+                               th:value="${#dates.format(event.startAt,'dd-MM-yyyy')}" name="startAt" id="date_event"
+                               placeholder="Entrer date d'evenment"/>
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <input type="hidden" name="id" th:value="${event.id}"/>
+                        <label for="event_content">
+                            Content d'evenment
+                        </label>
+                        <textarea rows="6" class="form-control m-input m-input--square" th:text="${event.content}" name="content"
+                                  id="event_content"
+                                  placeholder="Entrer le content de l'evenment">
+
+                                </textarea>
+                    </div>
+
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

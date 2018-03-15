@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Rechercher Student
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form id="add_student" class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/administration/students/search}">
+                    <div class="m-portlet__body">
+                        <div class="row m--padding-bottom-10 ">
+                            <div class="col-md-4">
+                                <div class="form-group m-form__group">
+
+                                    <label for="student_code">
+                                        Code APOGEE
+                                    </label>
+                                    <input type="text" class="form-control m-input m-input--square" name="codeApogee" id="student_code"
+                                           placeholder="Entrer le codeAPOGEE .."/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group m-form__group">
+                                    <label for="students_cne">
+                                        CNE
+                                    </label>
+                                    <input type="text" class="form-control m-input m-input--square" name="cne" id="students_cne"
+                                           placeholder="Enter cne"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group m-form__group">
+                                    <label for="students_cin">
+                                        CIN
+                                    </label>
+                                    <input type="text" class="form-control m-input m-input--square" name="cin" id="students_cin"
+                                           placeholder="Enter cin"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m--padding-bottom-10 ">
+                            <div class="col-md-6">
+                                <div class="form-group m-form__group">
+                                    <label for="firstName">
+                                        First Name
+                                    </label>
+                                    <input type="text" class="form-control m-input m-input--square" name="firstName" id="firstName"
+                                           placeholder="Enter LastName"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-form__group">
+                                    <label for="lastName">
+                                        Last Name
+                                    </label>
+                                    <input type="text" class="form-control m-input m-input--square" name="lastName" id="lastName"
+                                           placeholder="Enter firstName"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+
+
+            <!--end::Portlet-->
+        </div>
+        <div class="col-lg-12" th:if="${students}!=null">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Liste des etudiants
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="row m--padding-bottom-10 ">
+                        <div class="col-md-12">
+                            <table class="m-datatable" id="html_table" width="100%" >
+                                <thead>
+                                <tr>
+                                    <th title="Field #1">Code APOGEE</th>
+                                    <th title="Field #2">CIN</th>
+                                    <th title="Field #3">CNE</th>
+                                    <th title="Field #4">Nom</th>
+                                    <th title="Field #5">Arabic Nom</th>
+                                    <th title="Field #6">Date Naissance</th>
+                                    <th title="Field #7">Branche</th>
+                                    <th title="Field #8">option</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="student : ${students}">
+                                    <td>
+                                        <a th:href="@{'/admin/students/profile/'+${student.id}}"><span th:text="${student.codeAPOGEE}"></span></a>
+                                    </td>
+                                    <td th:text="${student.cin}">
+
+                                    </td>
+                                    <td th:text="${student.cne}">
+
+                                    </td>
+                                    <td th:text="${student.firstName} + ' ' + ${student.lastName}">
+
+                                    </td>
+                                    <td th:text="${student.firstNameAr} + ' ' + ${student.lastNameAr}">
+
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a th:href="@{'/admin/students/delete/'+${student.id}}"><i class="fa fa-remove"></i></a>
+                                        <a th:href="@{'/admin/students/edit/'+${student.id}}"><i class="fa fa-edit"></i></a>
+                                        <a th:href="@{'/admin/note/'+${student.id}+'/add'}"><i class="fa fa-plus"></i></a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--end::Portlet-->
+        </div>
+
+    </div>
+
+</div>
+
+<!--<th:block layout:fragment="js">
+    <script type="text/javascript">
+
+        //== Class definition
+
+        var FormControls = function () {
+            //== Private functions
+
+            var demo1 = function () {
+                $( "#add_student" ).validate({
+                    // define validation rules
+                    rules: {
+                        codeAPOGEE: {
+                            required: true
+                        },
+                        url: {
+                            required: true
+                        },
+                        digits: {
+                            required: true,
+                            digits: true
+                        },
+                        creditcard: {
+                            required: true,
+                            creditcard: true
+                        },
+                        phone: {
+                            required: true,
+                            phoneUS: true
+                        },
+                        option: {
+                            required: true
+                        },
+                        options: {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 4
+                        },
+                        memo: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 100
+                        },
+
+                        checkbox: {
+                            required: true
+                        },
+                        checkboxes: {
+                            required: true,
+                            minlength: 1,
+                            maxlength: 2
+                        },
+                        radio: {
+                            required: true
+                        }
+                    },
+
+                    //display error alert on form submit
+                    invalidHandler: function(event, validator) {
+                        var alert = $('#m_form_1_msg');
+                        alert.removeClass('m&#45;&#45;hide').show();
+                        mApp.scrollTo(alert, -200);
+                    },
+
+                    submitHandler: function (form) {
+                        //form[0].submit(); // submit the form
+                    }
+                });
+            }
+
+
+
+
+            return {
+                // public functions
+                init: function() {
+                    demo1();
+                }
+            };
+        }();
+
+        jQuery(document).ready(function() {
+            FormControls.init();
+        });
+    </script>
+</th:block>-->
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Editer Teacher
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/teachers/edit}">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <input type="hidden" name="id" th:value="${teacher.id}"/>
+                            <label for="teacher_nom">
+                                Nom 
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.firstName}" name="firstName" id="firstName"
+                                    placeholder="Entrer le nom .. "/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher_prenom">
+                                Prénom
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.lastName}" name="lastName" id="lastName"
+                                    placeholder="Entrer prénom .."/>
+                        </div>
+                         <div class="form-group m-form__group">
+                            <label for="teacher_firstNameAr">
+                                FirstNameAr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.firstNameAr}" name="firstNameAr" id="firstNameAr"
+                                    placeholder="Entrer firstNameAr .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher_lastNameAr">
+                                LastNameAr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.lastNameAr}" name="lastNameAr" id="lastNameAr"
+                                    placeholder="Entrer lastNameAr .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Cin
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.cin}" name="cin" id="cin"
+                                    placeholder="Entrer cin .."/>
+                        </div>
+                        
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Ppr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.ppr}" name="ppr" id="ppr"
+                                    placeholder="Entrer ppr .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Gender
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.gender}" name="gender" id="gender"
+                                    placeholder="Entrer gender .."/>
+                        </div>
+                        
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Hometown
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.hometown}" name="hometown" id="hometown"
+                                    placeholder="Entrer hometown .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Adresse
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.adress}" name="adress" id="adress"
+                                    placeholder="Entrer adresse .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Email
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.email}" name="email" id="email"
+                                    placeholder="Entrer email .."/>
+                        </div>
+                         <div class="form-group m-form__group">
+                            <label for="teacher">
+                                EmailPro
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.emailPro}" name="emailPro" id="emailPro"
+                                    placeholder="Entrer emailPro .."/>
+                        </div>
+                         <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Phone
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.phone}" name="phone" id="phone"
+                                    placeholder="Entrer phone .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Departement
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.departement}" name="departement" id="departement"
+                                    placeholder="Entrer departement .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_birthProvince">
+                                Date
+                            </label>
+                            <input type="Date" class="form-control m-input m-input--square" th:text="${#dates.format(teacher.birthday, 'yyyy-MMM-dd')}" name="birthday" id="students_birthday"
+                                   placeholder="Enter la date "/>
+
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="students_birthProvince">
+                                AffectationEnseignement
+                            </label>
+                            <input type="Date" class="form-control m-input m-input--square" th:text="${#dates.format(teacher.affectationEnseignement, 'yyyy-MMM-dd')}" name="affectationEnseignement" id="affectationEnseignement"
+                                   placeholder="Enter affectationEnseignement "/>
+
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="students_birthProvince">
+                                affectationMESRSFC
+                            </label>
+                            <input type="Date" class="form-control m-input m-input--square" th:text="${#dates.format(teacher.affectationMESRSFC, 'yyyy-MMM-dd')}" name="affectationMESRSFC" id="affectationMESRSFC"
+                                   placeholder="Enter affectationMESRSFC "/>
+
+                        </div>
+
+
+                         <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Specialite
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.specialite}" name="specialite" id="specialite"
+                                    placeholder="Entrer specialite .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Universite Diplomante
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.universiteDiplomante}" name="universiteDiplomante" id="universiteDiplomante"
+                                    placeholder="Entrer universiteDiplomante .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Structure Recherche
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.structureRecherche}" name="structureRecherche" id="structureRecherche"
+                                    placeholder="Entrer structureRecherche .."/>
+                        </div>
+                       <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Fonction Exercee
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.fonctionExercee}" name="fonctionExercee" id="fonctionExercee"
+                                    placeholder="Entrer fonctionExercee .."/>
+                        </div> 
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Grade
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.grade}" name="grade" id="grade"
+                                    placeholder="Entrer grade .."/>
+                        </div> 
+                         <div class="form-group m-form__group">
+                            <label for="teacher">
+                                AncienneteGrade
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.ancienneteGrade}" name="ancienneteGrade" id="ancienneteGrade"
+                                    placeholder="Entrer ancienneteGrade .."/>
+                        </div> 
+                        <div class="form-group m-form__group">
+                            <label for="teacher">
+                                Categorie
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.categorie}" name="categorie" id="categorie"
+                                    placeholder="Entrer Categorie .."/>
+                        </div> 
+                        <div class="form-group m-form__group">
+                            <label for="teacher_echelon">
+                                Echelon
+                            </label>
+                            <input type="number" class="form-control m-input m-input--square" th:value="${teacher.echelon}" name="echelon" id="teacher_echelon"
+                                    placeholder="Entrer echelon .."/>
+                        </div> 
+                         <div class="form-group m-form__group">
+                            <label for="teacher_indice">
+                                Indice
+                            </label>
+                            <input type="number" class="form-control m-input m-input--square" th:value="${teacher.indice}" name="indice" id="teacher_indice"
+                                    placeholder="Entrer indice .."/>
+                        </div> 
+                        <div class="form-group m-form__group">
+                            <label for="teacher_Anciennete_Echelon">
+                                Anciennete Echelon
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${teacher.ancienneteEchelon}" name="ancienneteEchelon" id="teacher_Anciennete_Echelon"
+                                    placeholder="Entrer ancienneteEchelon .."/>
+                        </div> 
+                       
+                        
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

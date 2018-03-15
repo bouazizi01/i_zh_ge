@@ -1,0 +1,14 @@
+
+.article-text, .page-text {
+	p {
+		text-align: justify;
+		line-height: 2.5rem;
+	}
+}
+
+
+.article-img {
+	img {
+		@include center-block;
+	}
+}

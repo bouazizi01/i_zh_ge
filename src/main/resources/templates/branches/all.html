@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="m-content">
+
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                   branches
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <!--begin: Search Form -->
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-8 order-2 order-xl-1">
+                                    <div class="form-group m-form__group row align-items-center">
+                                        <div class="col-md-4">
+                                            <div class="m-input-icon m-input-icon--left">
+                                                <input type="text" class="form-control m-input m-input--solid" placeholder="Search..." id="generalSearch"/>
+                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                    <span>
+                                                        <i class="la la-search"></i>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                    <a th:href="@{/admin/branches/add}" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+                                        <span>
+                                            <i class="la la-bank"></i>
+                                            <span>Ajouter Branch</span>
+                                        </span>
+                                    </a>
+                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Search Form -->
+                        <!--begin: Datatable -->
+                        <table class="m-datatable" id="html_table" width="100%">
+                            <thead>
+                            <tr>
+                                <th title="id">#</th>
+                                <th title="nom">Nom du branch</th>
+                                <th title="type">Type du branche</th>
+                                <th title="specialtie">Specialtie</th>
+                                <th title="abreviation">abreviation</th>
+                                <th title="option"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="b : ${branches}">
+                                <td th:text="${b.id}"></td>
+                                <td th:text="${b.name}"></td>
+                                <td th:text="${b.type}"></td>
+                                <td th:text="${b.specialty.name}"></td>
+                                <td th:text="${b.abbrv}"></td>
+                                <td>
+                                    <a th:href="@{'/admin/branches/delete/'+${b.id}}"><i class="fa fa-remove"></i></a>
+                                    <a th:href="@{'/admin/branches/edit/'+${b.id}}"><i class="fa fa-edit"></i></a>
+                                    <a th:href="@{'/admin/students/branch/'+${b.id}}"><i class="fa fa-users"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--end: Datatable -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

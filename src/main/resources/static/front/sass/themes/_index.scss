@@ -1,0 +1,31 @@
+
+
+a {
+	color: $my-gray;
+	&:hover,
+	&:focus {
+		color: $my-link-hover-color;
+		text-decoration: none;
+	}
+}
+
+h2 {
+	color: $my-headings-color;
+	span {
+		font-weight: normal;
+	}
+}
+
+.t-cursus { 
+	.cursus{
+		border: 2px solid $my-bleu;
+		a {
+			color: $my-bleu;
+			font-size: 14px;
+		}
+		border-radius: 5px;
+		padding: 10px 10px;
+		margin: 10px;
+	}
+	
+}

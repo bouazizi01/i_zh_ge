@@ -1,0 +1,97 @@
+/*!
+Theme Name 	: ENSA-Agadir v1.3
+Theme URI 	: 
+Author 		: Ouarezzamen Saber
+Author URI 	: fb/ouarezzamen.saber
+Description : 
+Version 	: v1.3
+License 	:
+License URI : 
+Tags 		: ensa agadir ensaa ecole national sciences appliquées
+*/
+
+
+
+//------------------------------//
+//          Compass             //
+//------------------------------// 
+@import "compass";
+
+
+@import "themes/my-variables";
+
+//------------------------------//
+//            fonts             //
+//------------------------------// 
+
+@import "themes/fonts";
+//@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+//@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+
+//------------------------------//
+//          Bootstrap           //
+//------------------------------// 
+
+// Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Reset and dependencies
+@import "bootstrap/normalize";
+@import "bootstrap/print";
+@import "bootstrap/glyphicons";
+
+// Core CSS
+@import "bootstrap/scaffolding";
+@import "bootstrap/grid";
+@import "bootstrap/forms";
+@import "bootstrap/buttons";
+
+// Components
+@import "bootstrap/component-animations";
+@import "bootstrap/dropdowns";
+@import "bootstrap/navs";
+@import "bootstrap/navbar";
+@import "bootstrap/breadcrumbs";
+@import "bootstrap/wells";
+@import "bootstrap/close";
+@import "bootstrap/panels";
+
+
+// Components w/ JavaScript
+@import "bootstrap/carousel";
+
+// Utility classes
+@import "bootstrap/utilities";
+@import "bootstrap/responsive-utilities";
+
+
+
+
+
+//------------------------------//
+//            Themes            //
+//------------------------------// 
+
+@import "themes/simple-post";
+
+@import "themes/buttons";
+@import "themes/theme-utilities";
+@import "themes/header";
+@import "themes/navigation";
+@import "themes/carousel";
+@import "themes/index";
+@import "themes/posts";
+@import "themes/footer";
+
+
+
+
+
+
+
+
+
+
+
+

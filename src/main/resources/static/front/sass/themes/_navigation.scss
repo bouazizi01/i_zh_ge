@@ -1,0 +1,52 @@
+
+/* ------------------------------------------------------------------------------------------
+ *                                     Navigation styles
+ * ------------------------------------------------------------------------------------------
+ */
+
+
+
+
+@media (min-width: 768px){
+	.navbar-nav{
+		margin-left: -30px; 
+		& li a {
+			font-size:14px;
+			line-height: 3rem;
+			font-weight: normal;
+		}
+
+	}
+}
+
+ @media (max-width: 992px) and (min-width: 768px){
+	.navbar-nav,
+	.navbar-right {
+	//	margin-left: -30px;
+		& li a {
+			font-size:14px;
+			//line-height: 3rem;
+			font-weight: normal;
+			padding: 10px;
+		}
+	}
+
+	// .t-navbar-btn {
+	// 	.btn {
+	// 		display: none;
+	// 	}
+	// }
+}
+
+ 
+@media (max-width:768px) {
+	.navbar-collapse{
+		background-color:$navbar-default-bg;
+		display: block;
+		z-index: 1000;
+		position: absolute;
+		top:49px;
+		left:15px;
+		width: 100%;
+	}
+}

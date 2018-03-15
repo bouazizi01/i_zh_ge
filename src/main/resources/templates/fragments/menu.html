@@ -1,0 +1,254 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<div th:fragment="menu">
+
+    <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+        <!-- BEGIN: Aside Menu -->
+        <div id="m_ver_menu"
+             class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark m-aside-menu--dropdown "
+             data-menu-vertical="true"
+             data-menu-dropdown="true" data-menu-scrollable="true" data-menu-dropdown-timeout="500">
+            <!--menu  for admin-->
+            <ul sec:authorize="hasAuthority('super_admin')" class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/dashboard}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-line-graph"></i>
+                        <span class="m-menu__link-text">
+                            Dashboard
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/admin/students/new}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-light "></i>
+                        <span class="m-menu__link-text">
+                            Nouveau Students
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/salles/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-symbol"></i>
+                        <span class="m-menu__link-text">
+                            Salles
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/modules/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-layers"></i>
+                        <span class="m-menu__link-text">
+                            Modules
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/semesters/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-tabs"></i>
+                        <span class="m-menu__link-text">
+                            Semesters
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/groups/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-users"></i>
+                        <span class="m-menu__link-text">
+                            Groups
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/branches/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-route"></i>
+                        <span class="m-menu__link-text">
+                            Branches
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/specialtys/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-route"></i>
+                        <span class="m-menu__link-text">
+                            Specialties
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/teachers/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-user"></i>
+                        <span class="m-menu__link-text">
+                            Professeurs
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/students/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-user"></i>
+                        <span class="m-menu__link-text">
+                            Etudiants
+                        </span>
+                    </a>
+                </li>
+                <li  class="m-menu__item "
+                     aria-haspopup="true">
+                    <a th:href="@{/admin/admins/all}" class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-profile-1"></i>
+                        <span class="m-menu__link-text">
+                            Admins
+                        </span>
+                    </a>
+                </li>
+
+
+            </ul>
+             <!--menu  for admin-->
+            <ul sec:authorize="hasAuthority('scolarity')" class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/scolarity/documents}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-folder-2"></i>
+                        <span class="m-menu__link-text">
+                            Documents
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/scolarity/events}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-calendar-2"></i>
+                        <span class="m-menu__link-text">
+                            Evenements
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/scolarity/annonces}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-notes"></i>
+                        <span class="m-menu__link-text">
+                            Annonces
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+            <!--menu  for teacher-->
+            <ul sec:authorize="hasAuthority('teacher')" class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/teacher/timeline/planing}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-time-3"></i>
+                        <span class="m-menu__link-text">
+                            Emploi du Temps
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/teacher/reclamations}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-warning-2"></i>
+                        <span class="m-menu__link-text">
+                            Reclamations
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/teacher/homeworks}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-app"></i>
+                        <span class="m-menu__link-text">
+                            Devoirs
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <!--menu  for student-->
+            <ul sec:authorize="hasAuthority('student')" class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                <li class="m-menu__item" aria-haspopup="true">
+                    <a th:href="@{/student/my-profile}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-profile"></i>
+                        <span class="m-menu__link-text">
+                            Mes Informations
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/student/my-notes}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-confetti"></i>
+                        <span class="m-menu__link-text">
+                            Notes
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/student/timeline/planing}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-time-3"></i>
+                        <span class="m-menu__link-text">
+                            Emploi du Temps
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/student/homeworks}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-app"></i>
+                        <span class="m-menu__link-text">
+                            Devoirs
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item  " aria-haspopup="true">
+                    <a th:href="@{/student/my-reclamations}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-warning-2"></i>
+                        <span class="m-menu__link-text">
+                            Reclamations
+                        </span>
+                    </a>
+                </li>
+                <li class="m-menu__item " aria-haspopup="true">
+                    <a th:href="@{/student/my-documents}" class="m-menu__link ">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-folder-2"></i>
+                        <span class="m-menu__link-text">
+                            Documents
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- END: Aside Menu -->
+    </div>
+
+</div>
+</body>
+</html>

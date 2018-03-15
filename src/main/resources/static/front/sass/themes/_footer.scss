@@ -1,0 +1,34 @@
+.t-footer {
+	background-color : $bleu-dark;
+	padding: 1.5rem 0;
+	color: $gray;
+	line-height: 2rem;
+
+	li:first-child p{
+		text-align: justify;
+	}
+	h3{
+		font-size: 1.5rem;
+		color: #babcbe;
+	}
+}
+
+.t-footer-liens{
+	a:before {
+		content: "- ";
+	}
+}
+
+/* Copyright */
+
+.copyright {
+	background-color: #00050a;
+
+	p {
+		margin:0;
+		font-size:10px;
+		color: #282e34;
+		letter-spacing: 0.0625rem; //0.0625 x 16 = 1px;
+		line-height: 3rem;
+	}
+}

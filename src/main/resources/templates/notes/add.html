@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div th:if="${id} != null" class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Editer une Note
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form th:object="${noteCreation}" class="m-form m-form--fit m-form--label-align-right" method="post"  >
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <label for="exampleSelect1">
+                                Choisissez un module :
+                            </label>
+                            <select name="moduleId" class="form-control m-input m-input&#45;&#45;square" id="exampleSelect1">
+                                <option th:each="module : ${modules}"  th:value="${module.id}" th:text="${module.name}">
+                                </option>
+                            </select>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="note">
+                                la note
+                            </label>
+                            <input th:name="note" type="number" min="0" max="20" maxlength="2" name="note" id="note" class="form-control m-input m-input--square"
+                                   aria-describedby="la note" placeholder="Entrez la note"/>
+                            <span class="m-form__help" th:errors="*{note}"></span>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="session">
+                                Session
+                            </label>
+                            <input id="studentId" name="studentId" type="hidden" th:value="${id}" title=""/>
+                            <input type="text" name="session" id="session" class="form-control m-input m-input--square"
+                                   aria-describedby="la session" placeholder="Entrez la session"/>
+                            <!--<span class="m-form__help" th:errors="*{session}"></span>-->
+                        </div>
+
+
+                        <div class="form-group m-form__group">
+                            <label for="year">
+                                l'année   </label>
+                            <input min="2000"  max="2100" maxlength="4" minlength="4" type="number" name="year" id="year" class="form-control m-input m-input--square"
+                                   aria-describedby="Nom du groupe" placeholder="Entre le nom du groupe"/>
+                            <span class="m-form__help" th:errors="*{year}"></span>
+
+                        </div>
+
+                        <input id="studentId" name="studentId" type="hidden" th:value="${id}" title=""/>
+
+
+                    </div>
+
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <!--end::Portlet-->
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajouter par fichier Excel
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/notes/xls-add}" enctype="multipart/form-data">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <label for="year2">
+                                L'annee Scolaire
+                            </label>
+                            <input type="number" value="2017" name="year" id="year2" class="form-control m-input m-input--square"
+                                   aria-describedby="L'annee scolaire" placeholder="Entrez l'annee scolaire"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="module">
+                                Code Module
+                            </label>
+                            <input type="text" name="module" id="module" readonly="readonly" class="form-control m-input m-input--square"
+                                   aria-describedby="code du module" placeholder="Entrez le code du module"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="notes_xls_file">
+                                Fichier Excel
+                            </label>
+                            <div></div>
+                            <label class="custom-file">
+                                <input type="file" id="notes_xls_file" name="notes_xls_file" class="custom-file-input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <!--end::Portlet-->
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajouter par fichier Zip
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/notes/xls-add/zip}" enctype="multipart/form-data">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <label for="year2">
+                                L'annee Scolaire
+                            </label>
+                            <input type="number" value="2017" name="year" id="year3" class="form-control m-input m-input--square"
+                                   aria-describedby="L'annee scolaire" placeholder="Entrez l'annee scolaire"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="note_zip">
+                                Fichier Excel
+                            </label>
+                            <div></div>
+                            <label class="custom-file">
+                                <input type="file" id="note_zip" name="note_zip" class="custom-file-input" accept="application/zip,application/x-zip,application/x-zip-compressed,application/octet-strea"/>
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<th:block layout:fragment="js">
+    <script type="text/javascript">
+        $("#notes_xls_file").change(function () {
+            var fileInput = document.getElementById('notes_xls_file');
+            var filename = fileInput.files[0].name;
+            var name=filename.split(".")[0];
+            console.log(name);
+            $("#module").val(name);
+        })
+
+
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,27 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+### Maven ###
+.mvn/
+mvnw
+mvnw.cmd
+
+
+### Production Config ###
+pom-prod.xml
+src/main/rescources/application-prod.properties

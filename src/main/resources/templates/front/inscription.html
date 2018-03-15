@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="front/fbase">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+
+    <form id="add_student" th:action="@{/inscription}" class="m-form m-form--fit m-form--label-align-right" method="post" >
+        <div class="panel panel-default">
+            <div class="panel-heading">Panel with panel-default class</div>
+
+
+            <div class="panel-body">
+                <div class="col-lg-6 col-md-6">
+
+                <div class="form-group m-form__group">
+                    <label for="student_code">
+                        Code APOGEE
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="codeAPOGEE" id="student_code"
+                           placeholder="Entrer le codeAPOGEE .."/>
+                </div>
+
+                <div class="form-group m-form__group">
+                    <label for="students_cne">
+                        Cne
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="cne" id="students_cne"
+                           placeholder="Enter cne"/>
+
+                </div>
+                <div class="form-group m-form__group">
+                    <label for="students_cin">
+                        Cin
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="cin" id="students_cin"
+                           placeholder="Enter cin"/>
+
+                </div>
+
+                <div class="form-group m-form__group">
+                    <label for="students_firstName">
+                        First Name
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="firstName" id="students_firstName"
+                           placeholder="Enter firstName"/>
+
+                </div>
+                <div class="form-group m-form__group">
+                    <label for="students_firstNameAr">
+                        الإسم
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="firstNameAr" id="students_firstNameAr"
+                           placeholder="الإسم"/>
+
+                </div>
+
+                <div class="form-group m-form__group">
+                    <label for="students_lastName">
+                        Last Name
+                    </label>
+                    <input type="text" class="form-control m-input m-input--square" name="lastName" id="students_lastName"
+                           placeholder="Enter lastName"/>
+
+                </div>
+            </div>
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="form-group m-form__group">
+                        <label for="students_lastNameAr">
+                            النسب
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square" name="lastNameAr" id="students_lastNameAr"
+                               placeholder="النسب"/>
+
+                    </div>
+
+                    <div class="m-form__group form-group">
+                        <label >
+                            Gender
+                        </label>
+                        <div class="m-radio-inline">
+                            <label class="m-radio">
+                                <input checked="checked" name="example_3" value="1" type="radio"/>
+                                Male
+                                <span></span>
+                            </label>
+                            <label class="m-radio">
+                                <input name="example_3" value="2" type="radio"/>
+                                Female
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group m-form__group">
+                        <label for="students_hometown">
+                            Home town
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square" name="hometown" id="students_hometown"
+                               placeholder="Enter hometown"/>
+
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <label for="students_birthProvince">
+                            Birth Province
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square" name="birthProvince" id="students_birthProvince"
+                               placeholder="Enter birthProvince"/>
+
+                    </div>
+                    <div class="form-group m-form__group">
+                        <label for="students_birthProvince">
+                            Birthday
+                        </label>
+                        <input type="date" class="form-control m-input m-input--square" name="birthday" id="students_birthday"
+                               placeholder="Enter la date "/>
+
+                    </div>
+                    <div class="form-group m-form__group">
+                        <label for="students_adress">
+                            Adress
+                        </label>
+                        <input type="text" class="form-control m-input m-input--square" name="adress" id="students_adress"
+                               placeholder="Enter adress"/>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                        <button type="submit" class="btn btn-success pull-right">
+                            Submit
+                        </button>
+
+
+                        <button type="reset" class="btn btn-danger">
+                            Cancel
+                        </button>
+
+            </div>
+
+        </div>
+
+
+
+    </form>
+</div>
+</body>
+</html>

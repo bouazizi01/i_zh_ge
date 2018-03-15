@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--
+Platform : UIZ SCHOLAR
+Version : 1.0.0
+Author : NAJEH YOUSSEF
+Contact : yo.najeh@gmail.cm
+LinkedIn : https://www.linkedin.com/in/yo-najeh/
+Facebook : https://www.facebook.com/yo.najeh
+-->
+<head>
+    <meta charset="utf-8"/>
+    <title>UIZ SCHOLAR</title>
+    <meta name="description" content="Latest updates and statistic charts"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families": ["Montserrat:300,400,500,600,700", "Roboto:300,400,500,600,700"]},
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!--end::Web font -->
+    <!--begin::Base Styles -->
+    <!--begin::Page Vendors -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css}"/>
+    <!--end::Page Vendors -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/assets/vendors/base/vendors.bundle.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/assets/demo/demo3/base/style.bundle.css}"/>
+    <!--end::Base Styles -->
+    <link rel="shortcut icon" href="assets/demo/demo3/media/img/logo/favicon.ico"/>
+    <style>
+        form span .m-form__help{
+            color: #e40004 !important;
+        }
+    </style>
+
+</head>
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+    <!-- BEGIN: Header -->
+    <div th:replace="fragments/header :: header"/>
+    <!-- END: Header -->
+
+    <!-- begin::Body -->
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        <!-- BEGIN: Left Aside -->
+        <button class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">
+            <i class="la la-close"></i>
+        </button>
+        <div th:replace="fragments/menu :: menu"/>
+
+        <!-- END: Left Aside -->
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <!-- BEGIN: Subheader -->
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title ">
+                            Dashboard
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Subheader -->
+            <div class="m-content">
+                <!--Begin::Main Portlet-->
+                <div class="row">
+                    <section layout:fragment="content"></section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Body -->
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+
+<!--begin::Base Scripts -->
+<script th:src="@{/assets/vendors/base/vendors.bundle.js}"></script>
+<script th:src="@{/assets/demo/demo3/base/scripts.bundle.js}"></script>
+<!--end::Base Scripts -->
+<!--begin::Page Vendors -->
+<script th:src="@{/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js}"></script>
+<script th:src="@{/assets/vendors/custom/fullcalendar/locale-all.min.js}"></script>
+<!--end::Page Vendors -->
+<!--begin::Page Snippets -->
+<script th:src="@{/assets/app/js/dashboard.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/1.0.1/base64.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas2image@1.0.5/canvas2image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+
+<!--end::Page Snippets -->
+<!--begin::Page Resources -->
+<script th:src="@{/assets/demo/default/custom/components/datatables/base/html-table.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/locale/fr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"></script>
+<script type="application/javascript">
+    $( document ).ready(function() {
+        $.get( "/api/notifications", function( data ) {
+            console.log(data.length);
+            $("#notification-badge").append(data.length);
+            $.each(data, function( index, notification ) {
+                var element='<div class="m-list-timeline__item"><span class="m-list-timeline__badge"></span>'+
+                    '<span class="m-list-timeline__text"><a href="'+notification.url+'">'+notification.message+
+                    '</a></span>'+
+                    '<span class="m-list-timeline__time">'+moment(notification.createdAt).fromNow()+'</span> </div>';
+                $(".m-list-timeline__items").append(element);
+            });
+        });
+    });
+</script>
+<!--end::Page Resources -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var host =window.location.host.toString()
+        var url =window.location.href.toString()
+        var relativeUrl =url.split(host)[1]
+        var parts=relativeUrl.split('/')
+
+        console.log("relativeUrl",relativeUrl)
+        $("#m_ver_menu ul li ").removeClass("m-menu__item--active")
+        var elements = $('a[href="' + relativeUrl + '"]')
+        if (elements.length > 0){
+            var element=elements[0];
+            $(element).parent().addClass('m-menu__item--active')
+            console.log(element);
+        }else{
+            elements = $('a[href="' + relativeUrl + '/all"]')
+            if (elements.length > 0){
+                var element=elements[0];
+                console.log(element);
+                $(element).parent().addClass('m-menu__item--active')
+            }
+        }
+
+    })
+</script>
+<script type="text/javascript">
+    //== Class definition
+
+    var BootstrapDatepicker = function () {
+
+        //== Private functions
+        var demos = function () {
+            // minimum setup
+            $('.datepicker-simple').datepicker({
+                format: 'dd-mm-yyyy',
+                todayHighlight: true,
+                orientation: "bottom left",
+                templates: {
+                    leftArrow: '<i class="la la-angle-left"></i>',
+                    rightArrow: '<i class="la la-angle-right"></i>'
+                }
+            });
+
+
+        }
+
+        return {
+            // public functions
+            init: function() {
+                demos();
+            }
+        };
+    }();
+
+    jQuery(document).ready(function() {
+        BootstrapDatepicker.init();
+    });
+</script>
+<section layout:fragment="js"></section>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Editer un Branche
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form th:object="${branch}" class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/branches/edit}">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <input type="hidden" name="id" th:value="${branch.id}"/>
+                            <label for="branch_name">
+                                Nom de Branche
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${branch.name}" name="name" id="branch_name"
+                                    placeholder="Entrer le nom du branch"/>
+                            <span class="m-form__help" th:errors="*{name}"></span>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="branch_type">
+                                Type du Branch
+                            </label>
+                            <!--<input type="text" class="form-control m-input m-input&#45;&#45;square" name="type" id="branch_type"
+                                   placeholder="Entrer le type du branches"/>-->
+                            <select class="form-control m-input m-input--square" name="type" id="branch_type">
+                                <option value="licence fondamentale" th:attrappend="selected=${branch.type == 'licence fondamentale'}?'true':'false'">licence fondamentale</option>
+                                <option value="licence professionnelle" th:attrappend="selected=${branch.type == 'licence professionnelle'}?'true':'false'">licence professionnelle</option>
+                                <option value="master fondamentale" th:attrappend="selected=${branch.type == 'master fondamentale'}?'true':'false'">master fondamentale</option>
+                                <option value="master professionnel" th:attrappend="selected=${branch.type == 'master professionnel'}?'true':'false'">master professionnel</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="branch_specialty">
+                                Specialty
+                            </label>
+                            <!--<input type="text" class="form-control m-input m-input&#45;&#45;square" name="type" id="branch_type"
+                                   placeholder="Entrer le type du branches"/>-->
+                            <select class="form-control m-input m-input--square" name="specialty" id="branch_specialty">
+
+                                <option th:each="specialty : ${specialties}"  th:value="${specialty.id}" th:text="${specialty.name}" th:attrappend="selected=${branch.specialty.id == specialty.id}?'true':'false'"/>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="branch_nameAr">
+                                branch en arabe
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${branch.nameAr}" name="nameAr" id="branch_nameAr"
+                                    placeholder="Entrer le nom de specialty en arabe"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="branch_abbrv">
+                                Specialty en arabe
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${branch.abbrv}" name="abbrv" id="branch_abbrv"
+                                   placeholder="Entrer une abreviation"/>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

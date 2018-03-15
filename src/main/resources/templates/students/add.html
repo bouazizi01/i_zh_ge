@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajouter Student
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form id="add_student" th:object="${student}" class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/students/add}">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <label for="student_code">
+                                Code APOGEE
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="codeAPOGEE" id="student_code"
+                                   placeholder="Entrer le codeAPOGEE .."/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_first_inscription">
+                                First Inscription
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="firstInscription" id="students_first_inscription"
+                                   placeholder="Enter First Inscription"/>
+
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="students_cne">
+                                Cne
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="cne" id="students_cne"
+                                   placeholder="Enter cne"/>
+                            <span class="m-form__help" th:errors="*{cne}"></span>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_cin">
+                                Cin
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="cin" id="students_cin"
+                                   placeholder="Enter cin"/>
+                            <span class="m-form__help" th:errors="*{cin}"></span>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_firstName">
+                                First Name
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="firstName" id="students_firstName"
+                                   placeholder="Enter firstName"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_firstNameAr">
+                                First NameAr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="firstNameAr" id="students_firstNameAr"
+                                   placeholder="Enter firstNameAr"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_lastName">
+                                Last Name
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="lastName" id="students_lastName"
+                                   placeholder="Enter lastName"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_lastNameAr">
+                                Last NameAr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="lastNameAr" id="students_lastNameAr"
+                                   placeholder="Enter lastNameAr"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_gender">
+                                Gender
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="gender" id="students_gender"
+                                   placeholder="Enter gender"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_hometown">
+                                Home town
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="hometown" id="students_hometown"
+                                   placeholder="Enter hometown"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_hometown">
+                                hometownAr
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="hometownAr" id="students_hometownAr"
+                                   placeholder="Enter hometownAr"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_birthProvince">
+                                Birth Province
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="birthProvince" id="students_birthProvince"
+                                   placeholder="Enter birthProvince"/>
+
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label for="students_birthProvince">
+                                Date
+                            </label>
+                            <input type="Date" class="form-control m-input m-input--square" name="birthday" id="students_birthday"
+                                   placeholder="Enter la date "/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_diplome">
+                                Diplome
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="diplome" id="students_diplome"
+                                   placeholder="Enter diplome"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_etablissement">
+                                Etablissement
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="etablissement" id="students_etablissement"
+                                   placeholder="Enter etablissement"/>
+
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_adress">
+                                Adress
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" name="adress" id="students_adress"
+                                   placeholder="Enter adress"/>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <!--end::Portlet-->
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajouter par fichier Excel
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/students/xls-add}" enctype="multipart/form-data">
+                    <div class="m-portlet__body">
+
+                        <div class="form-group m-form__group">
+                            <label for="annee">Annee</label>
+                            <select class="form-control m-input" id="annee" name="annee">
+                                <option value="1">1ere annee</option>
+                                <option value="2">2eme annee</option>
+                                <option value="3">3eme annee</option>
+                            </select>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="branch">Branche</label>
+                            <select class="form-control m-input" id="branch" name="branch">
+                                <option th:each="branche : ${branches}" th:value="${branche.id}" th:text="${branche.name}" ></option>
+                            </select>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="students_xls_file">
+                                Fichier Excel
+                            </label>
+                            <div></div>
+                            <label class="custom-file">
+                                <input type="file" id="students_xls_file" name="students_xls_file" class="custom-file-input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <!--end::Portlet-->
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Ajoute Global
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/students/xls-add-global}" enctype="multipart/form-data">
+                    <div class="m-portlet__body">
+
+
+                        <div class="form-group m-form__group">
+                            <label for="students_xls_file_global">
+                                Fichier Excel
+                            </label>
+                            <div></div>
+                            <label class="custom-file">
+                                <input type="file" id="students_xls_file_global" name="students_xls_file_global" class="custom-file-input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                <span class="custom-file-control"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="js">
+    <script type="text/javascript">
+
+        //== Class definition
+
+        var FormControls = function () {
+            //== Private functions
+
+            var demo1 = function () {
+                $( "#add_student" ).validate({
+                    // define validation rules
+                    rules: {
+                        codeAPOGEE: {
+                            required: true,
+                        },
+                        url: {
+                            required: true
+                        },
+                        digits: {
+                            required: true,
+                            digits: true
+                        },
+                        creditcard: {
+                            required: true,
+                            creditcard: true
+                        },
+                        phone: {
+                            required: true,
+                            phoneUS: true
+                        },
+                        option: {
+                            required: true
+                        },
+                        options: {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 4
+                        },
+                        memo: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 100
+                        },
+
+                        checkbox: {
+                            required: true
+                        },
+                        checkboxes: {
+                            required: true,
+                            minlength: 1,
+                            maxlength: 2
+                        },
+                        radio: {
+                            required: true
+                        }
+                    },
+
+                    //display error alert on form submit
+                    invalidHandler: function(event, validator) {
+                        var alert = $('#m_form_1_msg');
+                        alert.removeClass('m--hide').show();
+                        mApp.scrollTo(alert, -200);
+                    },
+
+                    submitHandler: function (form) {
+                        //form[0].submit(); // submit the form
+                    }
+                });
+            }
+
+
+
+
+            return {
+                // public functions
+                init: function() {
+                    demo1();
+                }
+            };
+        }();
+
+        jQuery(document).ready(function() {
+            FormControls.init();
+        });
+    </script>
+</th:block>
+</body>
+</html>

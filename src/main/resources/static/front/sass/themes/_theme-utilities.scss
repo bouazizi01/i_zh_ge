@@ -1,0 +1,42 @@
+
+/* ------------------------------------------------------------------------------------------
+ *                                     Theme utilities
+ * ------------------------------------------------------------------------------------------
+ */
+
+.list-unstyled {
+    margin  : 0;
+    padding : 0;
+    list-style-type: none;
+}
+
+.t-margin-bottom {
+	margin-bottom : 2.5 * $line-height-base+rem;
+}
+
+ 
+@media (max-width:768px) {
+	.container{
+		max-width: 500px;
+	}
+}
+
+.align-right {
+	@include float-right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.heading {
+	h1{
+		margin-left: 15px;
+		color: $my-headings-color;
+	}
+}
+
+.col-centered{
+	margin:0 auto;
+	float: none;
+}

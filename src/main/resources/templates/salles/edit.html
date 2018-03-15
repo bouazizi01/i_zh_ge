@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--tab">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+											<span class="m-portlet__head-icon m--hide">
+												<i class="la la-gear"></i>
+											</span>
+                            <h3 class="m-portlet__head-text">
+                                Editer une Salle
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form class="m-form m-form--fit m-form--label-align-right" method="post" th:action="@{/admin/salles/edit}">
+                    <div class="m-portlet__body">
+                        <div class="form-group m-form__group">
+                            <input type="hidden" name="id" th:value="${salle.id}">
+                            <label for="amphi_name">
+                                Nom de la Salle
+                            </label>
+                            <input type="text" class="form-control m-input m-input--square" th:value="${salle.name}" name="name" id="amphi_name"
+                                    placeholder="Entrer le nom du salle"/>
+                        </div>
+                        <div class="form-group m-form__group">
+                            <label for="amphi_capacity">
+                                Capacity de salle
+                            </label>
+                            <input type="number" class="form-control m-input m-input--square" th:value="${salle.capacity}" name="capacity" id="amphi_capacity"
+                                    placeholder="Entrer la capacity moyenne"/>
+                        </div>
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions">
+                            <button type="submit" class="btn btn-metal">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Portlet-->
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

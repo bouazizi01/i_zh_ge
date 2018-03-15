@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="convecation" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1217c027-61e0-40ee-b866-aa07856faf46">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="full_name" class="java.lang.String"/>
+	<parameter name="cin" class="java.lang.String"/>
+	<parameter name="cne" class="java.lang.String"/>
+	<parameter name="current_date" class="java.lang.String"/>
+	<parameter name="branch" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="490" splitType="Stretch">
+			<staticText>
+				<reportElement x="53" y="73" width="446" height="28" uuid="1d9d2979-a813-4561-87f5-3826b433c828"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTESTATION DE SCOLARITE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="174" width="446" height="39" uuid="00a757f1-05ce-4400-a335-9be859b94c16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Je soussigné, le Vice Doyen du centre des lettres et des sciences humaines, campus universitaire Ait Melloul, atteste que :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="237" width="133" height="20" uuid="9e2f37bd-0526-4e97-af7b-45bfc91dfd7f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[L’étudiant(e) 		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="260" width="133" height="20" uuid="c4f90c79-7ad1-440a-a708-51270ba2c167"/>
+				<text><![CDATA[CIN 			:      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="284" width="133" height="20" uuid="52bd0b83-ec60-4dd8-917f-a15201b9f9e7"/>
+				<text><![CDATA[CNE /MASSAR		: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="307" width="133" height="20" uuid="41e8848f-c9d3-4652-afb4-0c437f37c455"/>
+				<text><![CDATA[Filière	                           :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="442" width="107" height="20" uuid="67d9b3f0-9ba3-499b-a8e2-63bd34d7801d"/>
+				<text><![CDATA[Fait à Ait Melloul le :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="398" y="442" width="100" height="20" uuid="841aff02-0ee5-47ac-a5ed-ebc300d77e37"/>
+				<textFieldExpression><![CDATA[$P{current_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="237" width="299" height="20" uuid="8cd31962-c3c0-4a93-bf2f-7444a827994a"/>
+				<textFieldExpression><![CDATA[$P{full_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="260" width="299" height="20" uuid="5b07d286-83e6-4615-bd00-6ab42293ba5d"/>
+				<textFieldExpression><![CDATA[$P{cin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="283" width="299" height="20" uuid="1cfe5ade-6634-4fd9-936b-966e9fab0c6d"/>
+				<textFieldExpression><![CDATA[$P{cne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="307" width="299" height="20" uuid="02b17c03-e95e-44ca-80e7-cc7719844d2e"/>
+				<textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="53" y="386" width="446" height="17" uuid="1e1142f2-b372-42c8-aca4-278f31cd08bb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Poursuit les études, au dit centre, au titre de l’année universitaire 2017/2018.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="378" y="7" width="120" height="46" uuid="3a5e55e1-2cf9-4f13-a74f-29d6f84e7c95"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

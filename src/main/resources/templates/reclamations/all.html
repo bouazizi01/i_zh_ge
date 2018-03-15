@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="m-content">
+
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Les Reclamations
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <!--begin: Search Form -->
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-8 order-2 order-xl-1">
+                                    <div class="form-group m-form__group row align-items-center">
+                                        <div class="col-md-4">
+                                            <div class="m-input-icon m-input-icon--left">
+                                                <input type="text" class="form-control m-input m-input--solid" placeholder="Search..." id="generalSearch"/>
+                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+															<span>
+																<i class="la la-search"></i>
+															</span>
+														</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Search Form -->
+                        <!--begin: Datatable -->
+                        <table class="m-datatable" id="html_table" width="100%">
+                            <thead>
+                            <tr>
+                                <th title="id">#</th>
+                                <th title="module">Module (Code)</th>
+                                <th title="note">Note</th>
+                                <th title="code apogge d l'etudiant" sec:authorize="hasAuthority('teacher')" >Etudiant</th>
+                                <th title="etat">Etat</th>
+                                <th title="option" sec:authorize="hasAuthority('teacher')" ></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="reclamation : ${reclamations}">
+                                <td th:text="${reclamation.id}"></td>
+                                <td th:text="${reclamation.note.module.name+' ('+reclamation.note.module.code+')'}"></td>
+                                <td>
+                                    <span th:text="${reclamation.note.note+' ('+reclamation.note.session+')'}"></span>
+                                    <span th:if="${reclamation.newNote}!=null" th:text="'-'+${reclamation.newNote}"></span>
+                                </td>
+                                <td  sec:authorize="hasAuthority('teacher')" >
+                                    <!--th:href="@{'/scolarity/students/profile/'+${reclamation.student.id}}"-->
+                                    <a  th:text="${reclamation.student.codeAPOGEE}"></a>
+                                </td>
+
+                                <td >
+                                    <!-- th:block rather than unneeded div -->
+                                    <th:block th:switch="${reclamation.state}">
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).INITIALIZED}">
+                                            <span class="m-badge m-badge--wide m-badge--warning" th:text="${reclamation.state}">
+
+                                            </span>
+                                        </div>
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).REFUSED_ADMIN}">
+                                            <span class="m-badge m-badge--wide m-badge--danger " th:text="${reclamation.state}" >
+
+                                            </span>
+                                        </div>
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).ACCEPTED_ADMIN}">
+                                            <span class="m-badge m-badge--wide m-badge--success " th:text="${reclamation.state}" >
+
+                                            </span>
+                                        </div>
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).REFUSED_TEACHER}">
+                                            <span class="m-badge m-badge--wide m-badge--danger" th:text="${reclamation.state}" >
+
+                                            </span>
+                                        </div>
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).ACCEPTED_TEACHER}">
+                                            <span class="m-badge m-badge--wide m-badge--success" th:text="${reclamation.state}" ></span>
+                                        </div>
+                                        <div th:case="${T(ma.najeh.ibnouzouhr.constant.Constant.DEMAND_REC_STATE).ACCEPTED_UPDATED}">
+                                            <span class="m-badge m-badge--wide m-badge--success" th:text="${reclamation.state}" ></span>
+                                        </div>
+                                    </th:block>
+                                </td>
+                                <td sec:authorize="hasAuthority('teacher')" th:if="${!isCoorinator}" >
+                                    <form th:action="@{/teacher/accept-reclamation}" method="post">
+                                        <div class="input-group">
+											<span class="input-group-btn" th:if="${reclamation.isRefusable()}">
+												<a class="btn btn-warning" th:href="@{'/teacher/reclamations/refuse/'+${reclamation.id}}">
+													<i class="fa fa-ban"></i>
+												</a>
+											</span>
+                                            <input th:if="${reclamation.isAcceptable()}" type="text" class="form-control" name="newNote"/>
+                                            <input th:if="${reclamation.isAcceptable()}" type="hidden" class="form-control" name="id" th:value="${reclamation.id}"/>
+                                            <span th:if="${reclamation.isAcceptable()}" class="input-group-btn">
+												<button class="btn btn-success" type="submit">
+													<i class="fa fa-check"></i>
+												</button>
+											</span>
+                                        </div>
+                                        <!--<button th:if="${reclamation.isAcceptable()}"  th:href="@{'/teacher/reclamations/validate/'+${reclamation.id}}"></button>
+                                        <a th:if="${reclamation.isRefusable()}"  th:href="@{'/teacher/reclamations/refuse/'+${reclamation.id}}"></a>-->
+                                    </form>
+                                </td>
+                                <td sec:authorize="hasAuthority('teacher')" th:if="${isCoorinator}" >
+                                    <a   th:href="@{'/teacher/reclamations/refuse/'+${reclamation.id}}"><i class="fa fa-ban"></i></a>
+                                    <a  th:href="@{'/teacher/reclamations/validate/'+${reclamation.id}}"><i class="fa fa-check"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--end: Datatable -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

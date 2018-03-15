@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div id="emploi" class="m-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--begin::Portlet-->
+                <div class="m-portlet" id="m_portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+												<span class="m-portlet__head-icon">
+													<i class="flaticon-map-location"></i>
+												</span>
+                                <h3 class="m-portlet__head-text">
+                                    Calendrier
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="#" id="toPdf"
+                                       class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+                                        <span>
+                                            <i class="la la-hdd-o"></i>
+                                            <span>Télecharger</span>
+                                        </span>
+                                    </a>
+                                    <a th:if="${isCoordinator}" th:href="@{/teacher/seances/add}"  class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+                                        <span>
+                                            <i class="la la-plus"></i>
+                                            <span>Creé des Seances</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div id="planing"></div>
+                    </div>
+                </div>
+                <div id="editor"></div>
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+    <!--begin::Modal-->
+    <div sec:authorize="hasAuthority('teacher')" class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Oprtion d'une seance
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="textMsj" class="text-center">
+                        Ajouter un devoirs pour ou bien s'absentir pour la seance du {TIME} avec le groupe {GR},semestre {SEM}
+                    </p>
+                    <p id="message" class="text-center m--font-danger">
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-warning" id="addAbsence">
+                        S'absenter
+                    </button>
+                    <button type="button" class="btn btn-primary" id="addHomeWork">
+                        Ajouter un devoirs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div >
+    <!--end::Modal-->
+</div>
+
+
+<th:block layout:fragment="js">
+    <!--begin::Page Resources -->
+    <script th:src="@{/assets/demo/default/custom/components/forms/widgets/bootstrap-timepicker.js}"></script>
+    <!--end::Page Resources -->
+
+    <script type="text/javascript" sec:authorize="hasAuthority('teacher')">
+
+        $(function() {
+            $("#toPdf").click(function() {
+                domtoimage.toJpeg(document.getElementById('emploi'), { quality: 1 })
+                    .then(function (dataUrl) {
+                        var link = document.createElement('a');
+                        link.download = 'my_planing.jpeg';
+                        link.href = dataUrl;
+                        link.click();
+                    });
+            });
+        });
+
+        var CalendarBasic = function() {
+            return {
+                //main function to initiate the module
+                init: function(events) {
+                    $('#planing').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'agendaWeek'
+                        },
+                        locale: 'fr',
+                        displayEventTime:false,
+                        timeFormat: 'H(:mm)',
+                        displayEventEnd:true,
+                        minTime: "08:00:00",
+                        maxTime: "19:00:00",
+                        editable: false,
+                        eventLimit: true, // allow "more" link when too many events
+                        navLinks: true,
+                        events: events,
+                        eventClick: function(calEvent, jsEvent, view) {
+                            var text="Ajouter un devoirs pour ou bien s'absentir pour la seance du {TIME} avec le groupe {GR},semestre {SEM}";
+                            $("#textMsj").text(
+                                text
+                                    .replace("{TIME}",calEvent.planing.day.name+" "+calEvent.planing.planingDate)
+                                    .replace("{GR}",calEvent.planing.seance.group.name +" ("+calEvent.planing.seance.group.module.name+")")
+                                    .replace("{SEM}",calEvent.planing.seance.group.module.semestre.name)
+                            );
+                            $("#message").text('');
+                            if (calEvent.id > 0){
+                                $("#m_modal_1").modal();
+                                $("#addHomeWork").on('click',function () {
+                                    window.location.href = "/teacher/homework/"+calEvent.id+"/add";
+                                });
+                                $("#addAbsence").on('click',function () {
+                                    $.post("/teacher/absences/save",{id:calEvent.id},function (data) {
+                                        if(data.hasOwnProperty('success')){
+                                            window.location.reload();
+                                        }else{
+                                            $("#message").text(data.errorMsj)
+                                        }
+                                    },'json')
+                                });
+                            }
+                            // change the border color just for fun
+                            $(this).css('border-color', 'red');
+
+                        },
+                        eventRender: function(event, element) {
+                            if (element.hasClass('fc-day-grid-event')) {
+                                element.data('content', event.description);
+                                element.data('placement', 'top');
+                                mApp.initPopover(element);
+                            } else if (element.hasClass('fc-time-grid-event')) {
+                                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
+                            } else if (element.find('.fc-list-item-title').lenght !== 0) {
+                                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
+                            }
+                        }
+                    });
+                }
+            };
+        }();
+
+        jQuery(document).ready(function() {
+            $.get( "/api/calendar/planings")
+                .done(function( data ) {
+                    console.log(data);
+                    if(data.status==="error"){
+                        notify( data.message,{autoHide:false,css:'bootstrap',className:'error'});
+                    }
+                    else if (data.status==="success"){
+                        CalendarBasic.init(data.content);
+                    }
+                })
+
+        });
+
+
+    </script>
+    <script type="text/javascript" sec:authorize="hasAuthority('student')">
+
+        $(function() {
+            $("#toPdf").click(function() {
+                domtoimage.toJpeg(document.getElementById('emploi'), { quality: 1 })
+                    .then(function (dataUrl) {
+                        var link = document.createElement('a');
+                        link.download = 'my_planing.jpeg';
+                        link.href = dataUrl;
+                        link.click();
+                    });
+            });
+        });
+
+        var CalendarBasic = function() {
+            return {
+                //main function to initiate the module
+                init: function(events) {
+                    $('#planing').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'agendaWeek'
+                        },
+                        locale: 'fr',
+                        displayEventTime:false,
+                        timeFormat: 'H(:mm)',
+                        displayEventEnd:true,
+                        minTime: "08:00:00",
+                        maxTime: "19:00:00",
+                        editable: false,
+                        eventLimit: true, // allow "more" link when too many events
+                        navLinks: true,
+                        events: events,
+                        eventRender: function(event, element) {
+                            if (element.hasClass('fc-day-grid-event')) {
+                                element.data('content', event.description);
+                                element.data('placement', 'top');
+                                mApp.initPopover(element);
+                            } else if (element.hasClass('fc-time-grid-event')) {
+                                element.find('.fc-title').append('<div class="fc-description">' + event.description + '</div>');
+                            } else if (element.find('.fc-list-item-title').lenght !== 0) {
+                                element.find('.fc-list-item-title').append('<div class="fc-description">' + event.description + '</div>');
+                            }
+                        }
+                    });
+                }
+            };
+        }();
+
+        jQuery(document).ready(function() {
+            $.get( "/api/calendar/planings")
+                .done(function( data ) {
+                    console.log(data);
+                    if(data.status==="error"){
+                        notify( data.message,{autoHide:false,css:'bootstrap',className:'error'});
+                    }
+                    else if (data.status==="success"){
+                        CalendarBasic.init(data.content);
+                         }
+                })
+
+        });
+
+
+    </script>
+</th:block>
+</body>
+</html>

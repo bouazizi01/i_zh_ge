@@ -1,0 +1,54 @@
+
+
+.t-actualites {
+	padding: 1.5rem 0 ;
+	h2 {
+		margin-left: 15px;
+	}
+	
+}
+
+
+.t-posts {
+		li {
+		margin-bottom: 3rem;
+		
+	}
+
+	.title-post a{
+
+		font-size: 1.5rem; 
+		line-height: 1.5rem;
+		margin: 1.5rem 0;
+		color: #323232;
+
+		&:hover{
+			color: $my-link-hover-color;
+		}
+	}
+	
+	.img-post img {
+		@include center-block;
+	}
+
+
+	li p {
+		//color: $dark-gray;
+		font-size: 14px;
+		line-height: 2rem;
+		text-align: justify;
+		.la-suite {
+			margin-top: 1rem;
+			color: $my-link-hover-color;
+			//margin-bottom: 3rem;
+		}
+		
+	}
+
+}
+
+@media (max-width: 768px) {
+		.t-posts li {
+				margin-bottom: 7rem;
+		}
+}	

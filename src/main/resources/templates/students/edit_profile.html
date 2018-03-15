@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+        layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4">
+            <div class="m-portlet m-portlet--full-height  ">
+                <div class="m-portlet__body">
+                    <div class="m-card-profile">
+                        <div class="m-card-profile__title m--hide">
+                            Your Profile
+                        </div>
+                        <div class="m-card-profile__pic">
+                            <div class="m-card-profile__pic-wrapper">
+                                <img th:src="@{/imgs/student_default.png}" alt=""/>
+                            </div>
+                        </div>
+                        <div class="m-card-profile__details">
+                            <span class="m-card-profile__name"></span>
+                            <a href="" class="m-card-profile__email m-link" th:text="${student== null ? '' : student.firstName + ' ' + student.lastName}"></a>
+                        </div>
+                    </div>
+                    <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+                        <li class="m-nav__separator m-nav__separator--fit"></li>
+                        <li class="m-nav__section m--hide">
+                            <span class="m-nav__section-text">
+                                Section
+                            </span>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAuthority('super_admin')" th:href="@{'/admin/student/'+${student.id}+'/notes'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-signs"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Notes
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                            <a sec:authorize="hasAuthority('scolarity')" th:href="@{'/scolarity/student/'+${student.id}+'/notes'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-signs"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Notes
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-tools">
+                        <ul  class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
+                            role="tablist">
+                            <li class="nav-item m-tabs__item">
+                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1"
+                                   role="tab">
+                                    <i class="flaticon-share m--hide"></i>
+                                    Editer Mes Informations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div sec:authorize="hasAuthority('student')"  class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                                     data-dropdown-toggle="hover" aria-expanded="true">
+                                    <a th:href="@{/student/my-profile}"
+                                       class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                        <i class="la la-eye"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="m_user_profile_tab_1">
+                        <form class="m-form m-form--fit m-form--label-align-right" method="post"  >
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-10 ml-auto">
+                                        <h3 class="m-form__section">
+                                            1. Details Personnelles
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="firstName" class="col-2 col-form-label">
+                                        Nom
+                                    </label>
+                                    <div class="col-7">
+                                        <input id="firstName" name="firstName" class="form-control m-input" type="text" th:value="${student== null ? '' : student.lastName}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="lastName" class="col-2 col-form-label">
+                                        Prenom
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="lastName" name="lastName" type="text" th:value="${student== null ? '' : student.firstName }"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="lastNameAr" class="col-2 col-form-label">الاسم العائلى</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="lastNameAr" name="lastNameAr" style="text-align: right" type="text" th:value="${student== null ? '' :  student.lastNameAr}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="firstNameAr" class="col-2 col-form-label">الاسم الشخصي</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="firstNameAr" name="firstNameAr" style="text-align: right" type="text" th:value="${student== null ? '' : student.firstNameAr }"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="adress" class="col-2 col-form-label">
+                                        Adresse
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="adress" name="adress" type="text" th:value="${student.adress== null ? '' : student.adress}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="hometown" class="col-2 col-form-label">
+                                        Ville Natale
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="hometown" name="hometown" type="text" th:value="${student.hometown== null ? '' : student.hometown}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="hometownAr" class="col-2 col-form-label">المدينة</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" id="hometownAr" name="hometownAr" type="text" th:value="${student.hometownAr== null ? '' : student.hometownAr}"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="m-portlet__foot m-portlet__foot--fit">
+                                <div class="m-form__actions">
+                                    <button type="submit" class="btn btn-metal pull-right">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

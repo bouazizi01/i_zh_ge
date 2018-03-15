@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="header">
+    <header>
+        <nav class="t-top-nav hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Bibliothèque</a></li>
+                            <li><a href="#">Lauréats</a></li>
+                            <li><a href="#">Entreprises</a></li>
+                            <li><a href="#">Recherches</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="t-search right">
+                            <p>Rechercher...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container t-header">
+            <div class="row">
+                <div class="t-logo col-lg-12">
+                    <img th:src="@{/front/images/logo.png}" class="img-responsive" alt="Logo Ensa Agadir"/>
+                </div>
+            </div>
+        </div>
+    </header><!-- END HEADER -->
+
+</div>
+</body>
+</html>

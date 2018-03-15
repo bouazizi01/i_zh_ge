@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+        layout:decorator="base">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4">
+            <div class="m-portlet m-portlet--full-height  ">
+                <div class="m-portlet__body">
+                    <div class="m-card-profile">
+                        <div class="m-card-profile__title m--hide">
+                            Your Profile
+                        </div>
+                        <div class="m-card-profile__pic">
+                            <div class="m-card-profile__pic-wrapper">
+                                <img th:src="@{/imgs/student_default.png}" alt=""/>
+                            </div>
+                        </div>
+                        <div class="m-card-profile__details">
+                            <span class="m-card-profile__name"></span>
+                            <a href="" class="m-card-profile__email m-link" th:text="${student== null ? '' : student.firstName + ' ' + student.lastName}"></a>
+                        </div>
+                    </div>
+                    <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+                        <li class="m-nav__separator m-nav__separator--fit"></li>
+                        <li class="m-nav__section m--hide">
+                            <span class="m-nav__section-text">
+                                Section
+                            </span>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('super_admin','scolarity')" th:href="@{'/administration/student/'+${student.id}+'/notes'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-signs"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Notes
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('super_admin','scolarity')" th:href="@{'/administration/print-convocation/'+${student.id}}" class="m-nav__link">
+                                <i class="m-nav__link-icon 	flaticon-multimedia-1"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Convocation
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('student')" th:href="@{'/student/print-convocation'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-multimedia-1"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Convocation
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('super_admin','scolarity')" th:href="@{'/admin/student/'+${student.id}+'/reclamations'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-signs-2"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Reclamations
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('super_admin','scolarity')" th:href="@{'/administration/attestation/'+${student.id}+'/pdf'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-interface-4"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Générer une attestation
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-nav__item">
+                            <a sec:authorize="hasAnyAuthority('super_admin','scolarity')" th:href="@{'/administration/success-attestation/'+${student.id}+'/pdf'}" class="m-nav__link">
+                                <i class="m-nav__link-icon flaticon-interface-4"></i>
+                                <span class="m-nav__link-title">
+                                    <span class="m-nav__link-wrap">
+                                        <span class="m-nav__link-text">
+                                            Générer une attestation de reussite
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!--<div class="m-portlet__body-separator"></div>
+                    <div class="m-widget1 m-widget1&#45;&#45;paddingless">
+                        <div class="m-widget1__item">
+                            <div class="row m-row&#45;&#45;no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title">
+                                        Member Profit
+                                    </h3>
+                                    <span class="m-widget1__desc">
+															Awerage Weekly Profit
+														</span>
+                                </div>
+                                <div class="col m&#45;&#45;align-right">
+														<span class="m-widget1__number m&#45;&#45;font-brand">
+															+$17,800
+														</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-widget1__item">
+                            <div class="row m-row&#45;&#45;no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title">
+                                        Orders
+                                    </h3>
+                                    <span class="m-widget1__desc">
+															Weekly Customer Orders
+														</span>
+                                </div>
+                                <div class="col m&#45;&#45;align-right">
+														<span class="m-widget1__number m&#45;&#45;font-danger">
+															+1,800
+														</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-widget1__item">
+                            <div class="row m-row&#45;&#45;no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title">
+                                        Issue Reports
+                                    </h3>
+                                    <span class="m-widget1__desc">
+															System bugs and issues
+														</span>
+                                </div>
+                                <div class="col m&#45;&#45;align-right">
+														<span class="m-widget1__number m&#45;&#45;font-success">
+															-27,49%
+														</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-tools">
+                        <ul  class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
+                            role="tablist">
+                            <li class="nav-item m-tabs__item">
+                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1"
+                                   role="tab">
+                                    <i class="flaticon-share m--hide"></i>
+                                    Informations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div sec:authorize="hasAuthority('student')"  class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                                     data-dropdown-toggle="hover" aria-expanded="true">
+                                    <a th:href="@{/student/edit-profile}"
+                                       class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                        <i class="la la-edit"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div sec:authorize="hasAuthority('admin')"  class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item m-portlet__nav-item--last">
+                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                                     data-dropdown-toggle="hover" aria-expanded="true">
+                                    <a href="#"
+                                       class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                        <i class="la la-gear"></i>
+                                    </a>
+                                    <div class="m-dropdown__wrapper">
+                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                        <div class="m-dropdown__inner">
+                                            <div class="m-dropdown__body">
+                                                <div class="m-dropdown__content">
+                                                    <ul class="m-nav">
+                                                        <li class="m-nav__section m-nav__section--first">
+                                                            <span class="m-nav__section-text">
+                                                                Quick Actions
+                                                            </span>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    Create Post
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    Send Messages
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-multimedia-2"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    Upload File
+                                                                 </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__section">
+                                                            <span class="m-nav__section-text">
+                                                                Useful Links
+                                                            </span>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                <span class="m-nav__link-text">
+                                                                    FAQ
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a href="" class="m-nav__link">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <span class="m-nav__link-text">
+																						Support
+																					</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__separator m-nav__separator--fit m--hide"></li>
+                                                        <li class="m-nav__item m--hide">
+                                                            <a href="#"
+                                                               class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                                                                Submit
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="m_user_profile_tab_1">
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-10 ml-auto">
+                                        <h3 class="m-form__section">
+                                            1. Details Personnelles
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        codeAPOGEE
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student== null ? '' : student.codeAPOGEE}"
+                                               id="example-text-input" th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Nom
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student== null ? '' : student.lastName}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Prenom
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student== null ? '' : student.firstName }"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">الاسم العائلى</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" style="text-align: right" type="text" th:value="${student== null ? '' :  student.lastNameAr}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">الاسم الشخصي</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" style="text-align: right" type="text" th:value="${student== null ? '' : student.firstNameAr }"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        CIN
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student== null ? '' : student.cin}"
+                                                th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Sexe
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.gender=='M' ? 'Homme' :'Femme'}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Date Naissance
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.birthday== null ? '' : #dates.format(student.birthday, 'yyyy-MMM-dd')}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Adresse
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.adress== null ? '' : student.adress}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Ville Natale
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.hometown== null ? '' : student.hometown}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">المدينة</label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" style="text-align: right" th:value="${student.hometown== null ? '' : student.hometownAr}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-10 ml-auto">
+                                        <h3 class="m-form__section">
+                                            2. Informations Scolaires
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Filière
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.branch== null ? '' : student.branch.name}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Première inscription
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.firstInscription== null ? '' : student.firstInscription}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Etablissement
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.etablissement== null ? '' : student.etablissement}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">
+                                        Diplôme
+                                    </label>
+                                    <div class="col-7">
+                                        <input class="form-control m-input" type="text" th:value="${student.diplome== null ? '' : student.diplome}"
+                                               th:disabled="${student!= null}"/>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane active" id="m_user_profile_tab_2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
